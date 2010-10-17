@@ -18,7 +18,7 @@ module Devise
             warden.set_user(strategy.user, :event => :authentication, :scope => scope)
           end
 
-          redirect_to Warden::OAuth::Utils.host_with_port(request)
+          redirect_to session[:return_to] or Warden::OAuth::Utils.host_with_port(request)
         else
           # Perform the redirect to Twitter
           strategy = warden.send(:_fetch_strategy, :twitter_oauth, scope)
